@@ -1,25 +1,16 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const PostSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  topic: { type: [String], required: true },
+  topic: { type: [String], enum: ['Politics', 'Health', 'Sport', 'Tech'], required: true },
   body: { type: String, required: true },
-  owner: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
-  expiresAt: { type: Date, required: true },
-  status: { type: String, enum: ["Live", "Expired"], default: "Live" },
-  likes: { type: [String], default: [] },
-  dislikes: { type: [String], default: [] },
-  comments: [
-    {
-      user: String,
-      text: String,
-    },
-  ],
+  expirationTime: { type: Date, required: true },
+  status: { type: String, enum: ['Live', 'Expired'], default: 'Live' },
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  likes: { type: Number, default: 0 },
+  dislikes: { type: Number, default: 0 },
+  comments: [{ user: String, comment: String, createdAt: { type: Date, default: Date.now } }],
 });
 
-PostSchema.methods.updateStatus = function () {
-  if (Date.now() > this.expiresAt) this.status = "Expired";
-};
-
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model('Post', postSchema);
