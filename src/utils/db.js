@@ -1,16 +1,20 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
 
+// MongoDB Atlas connection string
+const dbURI = 'mongodb+srv://jdruiz365:London-17@cluster0.rwrji.mongodb.net/your-database-name?retryWrites=true&w=majority';
+
+// Function to connect to MongoDB
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
+    // Connect to MongoDB Atlas
+    await mongoose.connect(dbURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log('MongoDB connected successfully.');
-  } catch (err) {
-    console.error('Error connecting to MongoDB:', err.message);
-    process.exit(1); // Exit process with failure
+    console.log('Connected to MongoDB Atlas!');
+  } catch (error) {
+    console.error('Error connecting to MongoDB Atlas:', error);
+    process.exit(1);  // Exit process with failure
   }
 };
 
