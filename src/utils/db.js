@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // MongoDB Atlas connection string
-const dbURI = 'mongodb+srv://jdruiz365:London-17@cluster0.rwrji.mongodb.net/your-database-name?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://jdruiz365:London-17@cluster0.rwrji.mongodb.net/cluster0?retryWrites=true&w=majority';
 
 // Function to connect to MongoDB
 const connectDB = async () => {
